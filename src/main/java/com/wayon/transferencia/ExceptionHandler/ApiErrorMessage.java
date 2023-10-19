@@ -1,4 +1,4 @@
-package com.ekan.controledebeneficiarioapi.ExceptionHandler;
+package com.wayon.transferencia.ExceptionHandler;
 
 import lombok.Builder;
 import lombok.Data;
