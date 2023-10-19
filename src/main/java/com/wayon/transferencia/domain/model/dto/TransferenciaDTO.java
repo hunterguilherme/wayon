@@ -18,5 +18,4 @@ public class TransferenciaDTO {
     private BigDecimal taxa;
     private LocalDate dataTransferencia;
     private LocalDate dataAgendamento;
-    private BigDecimal valorTotal;
 }

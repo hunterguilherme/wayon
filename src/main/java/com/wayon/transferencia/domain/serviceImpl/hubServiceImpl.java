@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Math.round;
@@ -40,8 +41,8 @@ public class hubServiceImpl implements hubService {
     }
 
     private BigDecimal calculaValorTaxa(TransferenciaDTO transferencia) {
-        BigDecimal conversaoPorcentagem = BigDecimal.valueOf(getPorcentagemTaxa(transferencia) / 100 + 1);
-        return transferencia.getValor().multiply(conversaoPorcentagem);
+        BigDecimal conversaoPorcentagem = BigDecimal.valueOf(getPorcentagemTaxa(transferencia));
+        return transferencia.getValor().multiply(conversaoPorcentagem).divide(BigDecimal.valueOf(100));
     }
 
     private static Double getPorcentagemTaxa(TransferenciaDTO transferencia) {
@@ -49,7 +50,7 @@ public class hubServiceImpl implements hubService {
         LocalDate dataAgendamento = transferencia.getDataAgendamento();
         LocalDate dataTransferencia = transferencia.getDataTransferencia();
         Long dias = Duration.between(dataAgendamento.atStartOfDay(), dataTransferencia.atStartOfDay()).toDays();
-        int faxaTaxa = (dias % 10 == 0) ? dias.intValue() / 10 : round(dias / 10) + 1; ;
+        int faxaTaxa = (dias % 10 == 0) ? dias.intValue() / 10 : round(dias / 10) + 1;
 
         return tabelaTaxa[faxaTaxa];
     }
@@ -58,14 +59,24 @@ public class hubServiceImpl implements hubService {
 
         boolean clienteOrigem = clienteRepository.existsByConta(transferencia.getContaOrigem());
         boolean clienteDestino = clienteRepository.existsByConta(transferencia.getContaDestino());
-        if (!(clienteOrigem  && clienteDestino ))
+        if (!(clienteOrigem && clienteDestino))
             throw new PreenchimentoIncorretoException("Conta de origem ou de destino não existente. Verificar digitos");
     }
 
     @Override
     public List<TransferenciaDTO> getBankStatment(String conta) {
+        List<Transferencia> transferencias = transferenciaRepository.findByContaOrigem(conta);
 
-        return null;
+        List<TransferenciaDTO> transferenciasDTO = new ArrayList<>();
+        ModelMapper mapper = new ModelMapper();
+
+        transferencias.forEach(transferencia ->{
+            TransferenciaDTO transferenciaDTO = new TransferenciaDTO();
+            mapper.map(transferencia, transferenciaDTO);
+            transferenciasDTO.add(transferenciaDTO);
+        });
+
+        return transferenciasDTO;
     }
 
 }
