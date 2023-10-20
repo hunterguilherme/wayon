@@ -1,8 +1,8 @@
 package com.wayon.transferencia.ExceptionHandler;
 
 
-import com.wayon.transferencia.domain.exceptions.EntidadeNaoEncontradaException;
-import com.wayon.transferencia.domain.exceptions.PreenchimentoIncorretoException;
+import com.wayon.transferencia.domain.exceptions.EntityNotFoundException;
+import com.wayon.transferencia.domain.exceptions.WrongTaxException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,8 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 @Slf4j
 public class BatidaHandlerException extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(PreenchimentoIncorretoException.class)
-    public ResponseEntity<?> handlePreenchimentoIncorretoException(PreenchimentoIncorretoException e) {
+    @ExceptionHandler(WrongTaxException.class)
+    public ResponseEntity<?> handlePreenchimentoIncorretoException(WrongTaxException e) {
 
         ApiErrorMessage apiErrorMessage = new ApiErrorMessage(e.getMessage());
 
@@ -25,8 +25,8 @@ public class BatidaHandlerException extends ResponseEntityExceptionHandler {
     }
 
 
-    @ExceptionHandler(EntidadeNaoEncontradaException.class)
-    public ResponseEntity<?> handleEntidadeNaoEncontradaExceptionn(EntidadeNaoEncontradaException e) {
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<?> handleEntidadeNaoEncontradaExceptionn(EntityNotFoundException e) {
 
         ApiErrorMessage apiErrorMessage = new ApiErrorMessage(e.getMessage());
 

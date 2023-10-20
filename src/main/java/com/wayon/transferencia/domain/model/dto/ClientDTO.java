@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class ClienteDTO {
+public class ClientDTO {
 
     private String nome;
     private String conta;

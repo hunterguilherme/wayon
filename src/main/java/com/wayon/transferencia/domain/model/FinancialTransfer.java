@@ -1,22 +1,21 @@
 package com.wayon.transferencia.domain.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
+import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Getter
-@Setter
-public class Transferencia {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class FinancialTransfer {
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
