@@ -1,10 +1,10 @@
 package com.wayon.transferencia.domain.exceptions;
 
 
-public class PreenchimentoIncorretoException extends RuntimeException{
+public class WrongTaxException extends RuntimeException{
     private static final long serialVersionUID = 1L;
 
-    public PreenchimentoIncorretoException(String mensagem) {
+    public WrongTaxException(String mensagem) {
         super(mensagem);
     }
 
