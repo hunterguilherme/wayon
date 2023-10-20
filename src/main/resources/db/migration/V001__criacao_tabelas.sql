@@ -1,4 +1,4 @@
-CREATE TABLE transferencia (
+CREATE TABLE financial_transfer (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     conta_origem VARCHAR(10),
     conta_destino VARCHAR(10),
@@ -8,7 +8,7 @@ CREATE TABLE transferencia (
     data_agendamento TIMESTAMP
 );
 
-CREATE TABLE cliente (
+CREATE TABLE client (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100),
     conta VARCHAR(10),
